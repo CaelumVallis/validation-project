@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  message: '',
+  values: {},
 };
 
 export const formDataSlice = createSlice({
   name: 'formData',
   initialState,
-  reducers: {},
+  reducers: {
+    addValues: (state, action) => {
+      console.log(action.payload);
+      state.values = action.payload;
+    },
+  },
 });
 
-// export const {} = counterSlice.actions;
+export const { addValues } = formDataSlice.actions;
 
-export default counterSlice.reducer;
+export default formDataSlice.reducer;
