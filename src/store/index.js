@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import formDataReducer from './formDataSlice';
+import formData from './formDataSlice';
 
 const store = configureStore({
   reducer: {
-    formDataReducer,
+    formData,
   },
 });
 
