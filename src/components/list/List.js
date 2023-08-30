@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 const ListItem = ({ data }) => {
   return (
     <div style={{ borderBottom: '1px solid orange' }}>
-      {Object.keys(data).map((field) => {
+      {Object.keys(data).map((field, i) => {
         return (
-          <p key={`field_${field}_${Math.random()}`}>
+          <p key={`field_${field}_#${i}`}>
             {field}: {data[field]}
           </p>
         );
@@ -19,8 +19,8 @@ export const List = () => {
 
   return (
     <div>
-      {list.map((el) => (
-        <ListItem data={el} key={`listItem_${el.message}_${Math.random()}`} />
+      {list.map((el, i) => (
+        <ListItem data={el} key={`listItem_${el.message}_#${i}`} />
       ))}
     </div>
   );
