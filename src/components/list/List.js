@@ -5,7 +5,7 @@ const ListItem = ({ data }) => {
     <div style={{ borderBottom: '1px solid orange' }}>
       {Object.keys(data).map((field) => {
         return (
-          <p key={Math.random()}>
+          <p key={`field_${field}_${Math.random()}`}>
             {field}: {data[field]}
           </p>
         );
@@ -20,7 +20,7 @@ export const List = () => {
   return (
     <div>
       {list.map((el) => (
-        <ListItem data={el} key={Math.random()} />
+        <ListItem data={el} key={`listItem_${el.message}_${Math.random()}`} />
       ))}
     </div>
   );
