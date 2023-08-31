@@ -1,16 +1,6 @@
 import { useFormik } from 'formik';
 import './Form.css';
 
-import { useDispatch } from 'react-redux';
-import { addValues } from '../../store/formDataSlice';
-
-// The `first_name` and `last_name` fields should be validated on the presents of information
-// The `email` field should be validated on the correctness of the email entered
-// The `message` field should be validated on the length of the message (minimum 10 characters)
-// State management code could be generated in a single file
-// Success message could be displayed as a simple alert
-// To verify that information was recorded and could be further sent, use console.log or alert.
-
 const validate = (values) => {
   const errors = {};
 
@@ -35,9 +25,7 @@ const validate = (values) => {
   return errors;
 };
 
-export const Form = () => {
-  const dispatch = useDispatch();
-
+export const Form = ({ pushToStore }) => {
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -46,7 +34,7 @@ export const Form = () => {
       message: '',
     },
     onSubmit: (values, { resetForm }) => {
-      dispatch(addValues(values));
+      pushToStore(values);
       alert('Your personal data was succesfully delivered to 3rd parties');
       resetForm();
     },
@@ -59,6 +47,7 @@ export const Form = () => {
         <label htmlFor='firstName'>First name:</label>
         <input
           id='firstName'
+          data-testid='firstName'
           name='firstName'
           type='text'
           onChange={formik.handleChange}
@@ -66,7 +55,9 @@ export const Form = () => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.firstName && formik.errors.firstName ? (
-          <div className='error-message'>{formik.errors.firstName}</div>
+          <div data-testid='errorMessage' className='error-message'>
+            {formik.errors.firstName}
+          </div>
         ) : null}
       </div>
 
@@ -74,6 +65,7 @@ export const Form = () => {
         <label htmlFor='lastName'>Last name:</label>
         <input
           id='lastName'
+          data-testid='lastName'
           name='lastName'
           type='text'
           onChange={formik.handleChange}
@@ -81,7 +73,9 @@ export const Form = () => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.lastName && formik.errors.lastName ? (
-          <div className='error-message'>{formik.errors.lastName}</div>
+          <div data-testid='errorMessage' className='error-message'>
+            {formik.errors.lastName}
+          </div>
         ) : null}
       </div>
 
@@ -89,6 +83,7 @@ export const Form = () => {
         <label htmlFor='email'>Email:</label>
         <input
           id='email'
+          data-testid='email'
           name='email'
           type='email'
           onChange={formik.handleChange}
@@ -96,7 +91,9 @@ export const Form = () => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.email && formik.errors.email ? (
-          <div className='error-message'>{formik.errors.email}</div>
+          <div data-testid='errorMessage' className='error-message'>
+            {formik.errors.email}
+          </div>
         ) : null}
       </div>
 
@@ -104,6 +101,7 @@ export const Form = () => {
         <label htmlFor='message'>Message:</label>
         <input
           id='message'
+          data-testid='message'
           name='message'
           type='text'
           onChange={formik.handleChange}
@@ -111,7 +109,9 @@ export const Form = () => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.message && formik.errors.message ? (
-          <div className='error-message'>{formik.errors.message}</div>
+          <div data-testid='errorMessage' className='error-message'>
+            {formik.errors.message}
+          </div>
         ) : null}
       </div>
 
